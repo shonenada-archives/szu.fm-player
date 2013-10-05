@@ -1,0 +1,41 @@
+﻿<!DOCTYPE html>
+<html>
+
+<head>
+    <title>SZU.FM Player</title>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <meta http-equiv="Content-Language" content="zh-CN" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <script src="static/components/jquery/jquery.min.js" language="javascript"></script>
+    <script src="static/scripts/player.js" language="javascript"></script>
+    <link type="text/css" href="static/styles/player.css" rel="stylesheet" />
+</head>
+
+<body>
+    <video id="szu-fm-player"></video>
+    <input id="pause-time" type="hidden" />
+    <div class="default">
+        <div id="music-box">
+            <div id="btn-rewind" class="button"></div>
+            <div id="btn-play" class="button btn-play"></div>
+            <div id="btn-ff" class="button"></div>
+
+            <div id="process-controller">
+                <div id="song-name">SZU.FM</div>
+                <div id="song-time">00:00 | 00:00</div>
+                <div id="process-bar"></div>
+                <div id="process-block"></div>
+            </div>
+
+            <div id="voice-controller">
+                <div id="btn-mute" class="button"></div>
+                <div id="volume-bar"></div>
+                <div id="volume-block"></div>
+                <div id="btn-full-voice" class="button"></div>
+            </div>
+        </div>
+    </div>
+
+    
+</body>
+</html>
