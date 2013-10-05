@@ -7,7 +7,6 @@ $ ->
     $("#btn-play").click ->
         # Instead toggle in this way
         iteration = $(this).data('iteration') || 1;
-
         switch iteration
             when 1
                 $(this).removeClass("btn-play").addClass("btn-stop");
@@ -19,7 +18,6 @@ $ ->
 
         iteration++;
         iteration = 1 if iteration > 2
-
         $(this).data('iteration', iteration);
         return ;
 
@@ -93,11 +91,13 @@ volumeProcessRange = (rangeVal) ->
     @player.volume = parseFloat(rangeVal)
     return ;
 
+
 durationProcessRange = (rangeVal) ->
     @player = document.getElementById("szu-fm-player")
     @player.currentTime = rangeVal * @player.duration;
     @player.play()
     return ;
+
 
 timeSpan = () ->
     @player = document.getElementById("szu-fm-player")
@@ -111,6 +111,7 @@ timeSpan = () ->
     , 1000)
     return ;
 
+
 timeDispose = (number) ->
     @minute = parseInt(number / 60)
     @second = parseInt(number % 60)
@@ -118,9 +119,11 @@ timeDispose = (number) ->
     @second = "0" + @second if @second < 10
     return @minute + ":" + @second
 
+
 timeAll = () ->
     @player = document.getElementById("szu-fm-player")
     return @player.duration
+
 
 playSong = (songUrl) ->
     $("#btn-play").removeClass("btn-play").addClass("btn-stop");
@@ -134,14 +137,22 @@ playSong = (songUrl) ->
     timeSpan();
     return ;
 
+
 pauseSong = () ->
     @player = document.getElementById("szu-fm-player")
     $("#pause-time").val(@player.currentTime)
     @player.pause()
     return ;
 
+
 continueSong = () ->
     @player = document.getElementById("szu-fm-player")
     @player.startTime = $("#pause-time").val();
     @player.play();
     return ;
+
+
+exports = this
+exports.playSong = playSong
+exports.pauseSong = pauseSong
+exports.continueSong = continueSong
