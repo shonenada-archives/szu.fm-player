@@ -1,7 +1,6 @@
 $ ->
 
     szuFmPlayer = document.getElementById("szu-fm-player");
-    DEFAULT_SOND = "qg";
     VOICE_FULL_WIDTH = "66px";
 
     # Play Button Action
