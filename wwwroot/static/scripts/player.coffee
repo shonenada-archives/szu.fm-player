@@ -22,6 +22,24 @@ $ ->
         return ;
 
 
+    # Rewind button
+    $("#btn-rewind").click ->
+        @player = document.getElementById("szu-fm-player")
+        @current = @player.currentTime
+        @player.currentTime = parseFloat(@current) - 1.5
+        @player.play()
+        return ;
+
+
+    # Fast forward button
+    $("#btn-ff").click ->
+        @player = document.getElementById("szu-fm-player")
+        @current = @player.currentTime
+        @player.currentTime = parseFloat(@current) + 1.0
+        @player.play()
+        return ;
+
+
     # Mute button
     $("#btn-mute").click ->
         $("#volume-block").css("width", "0")
@@ -34,26 +52,6 @@ $ ->
         $("#volume-block").css("width", VOICE_FULL_WIDTH)
         szuFmPlayer.volume = 1
         return ;
-
-
-    # Action for process controller
-    processControll = (e) ->
-        @process = $("#process-bar").offset()
-        @processStart = @process.left
-        @processLength = $("#process-bar").width()
-        @currentProcess = e.clientX - @processStart
-        durationProcessRange @currentProcess / @processLength
-        return @currentProcess
-
-
-    # Action for volume controller
-    volumeControll = (e) ->
-        @volume = $("#volume-bar").offset();
-        @volumeBarStart = @volume.left;
-        @volumeBarLength = $("#volume-bar").width();
-        @currentProcess = e.clientX - @volumeBarStart
-        volumeProcessRange @currentProcess / volumeBarLength
-        return @currentProcess
 
 
     # Process bar click action
@@ -82,6 +80,30 @@ $ ->
         @currentProcess = volumeControll(e)
         $("#volume-block").css("width", currentProcess)
         return;
+
+
+    # Action for process controller
+    processControll = (e) ->
+        @process = $("#process-bar").offset()
+        @processStart = @process.left
+        @processLength = $("#process-bar").width()
+        @currentProcess = e.clientX - @processStart
+        durationProcessRange @currentProcess / @processLength
+        return @currentProcess
+
+
+    # Action for volume controller
+    volumeControll = (e) ->
+        @volume = $("#volume-bar").offset();
+        @volumeBarStart = @volume.left;
+        @volumeBarLength = $("#volume-bar").width();
+        @currentProcess = e.clientX - @volumeBarStart
+        volumeProcessRange @currentProcess / volumeBarLength
+        return @currentProcess
+
+
+    szuFmPlayer.addEventListener 'ended', ->
+        console.log('called')
 
     return;
 
@@ -125,14 +147,15 @@ timeAll = () ->
     return @player.duration
 
 
-playSong = (songUrl) ->
+playSong = (song) ->
     $("#btn-play").removeClass("btn-play").addClass("btn-stop");
     iteration = $("#btn-play").data('iteration') || 1;
     iteration++;
     iteration = 1 if iteration > 2
     $("#btn-play").data('iteration', iteration);
+    $("#song-name").text song.title + " - " + song.artist
     @player = document.getElementById("szu-fm-player")
-    @player.src = songUrl
+    @player.src = song.url
     @player.play()
     timeSpan();
     return ;
